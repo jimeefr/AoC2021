@@ -21,6 +21,6 @@ def sel(diags,f):
         b+=1
     return int(diags[0],2)
 
-o,c = sel(diags[::],oxy),sel(diags[::],co2)
+o,c = sel(diags,oxy),sel(diags,co2)
 print(o,c)
 print(o*c)
