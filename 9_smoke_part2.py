@@ -28,12 +28,10 @@ def grow_bassin(data,x,y,bassin=[]):
         v1 = data[y1][x1]
         if v1 > v and v1 != 9 and not (x1,y1) in bassin: queue.append((x1,y1))
     bassin += queue
-    if len(queue):
-        for x1,y1 in queue: bassin = grow_bassin(data,x1,y1,bassin)
+    for x1,y1 in queue: bassin = grow_bassin(data,x1,y1,bassin)
     return bassin
 
 print(X,Y)
-count = 0
 bassins=[]
 for y in range(Y):
     for x in range(X):
@@ -43,8 +41,6 @@ for y in range(Y):
         if m and y>0 and data[y-1][x] <= v: m=False
         if m and x<X-1 and data[y][x+1] <= v: m=False
         if m and y<Y-1 and data[y+1][x] <= v: m=False
-        if m:
-            bassin = grow_bassin(data,x,y)
-            bassins.append(bassin)
+        if m: bassins.append(grow_bassin(data,x,y))
 bassins.sort(key=lambda x:-len(x))
 print(len(bassins[0])*len(bassins[1])*len(bassins[2]))
