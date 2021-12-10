@@ -7,14 +7,11 @@ data = read_input(10)
 def parse_line(line):
     stack=[]
     value = {')':1,']':2,'}':3,'>':4}
+    closing = {'(':')','[':']','{':'}','<':'>'}
     for c in line:
-        if c == '<': stack.append('>')
-        elif c == '(': stack.append(')')
-        elif c == '[': stack.append(']')
-        elif c == '{': stack.append('}')
-        else:
-            if c != stack[-1]: return 0
-            else: stack.pop()
+        if c in closing: stack.append(closing[c])
+        elif c != stack[-1]: return 0
+        else: stack.pop()
     if stack == []: return 0
     s = 0
     for c in stack[::-1]: s = s * 5 + value[c]

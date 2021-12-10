@@ -7,18 +7,11 @@ data = read_input(10)
 def parse_line(line):
     stack=[]
     value = {')':3,']':57,'}':1197,'>':25137}
+    closing = {'(':')','[':']','{':'}','<':'>'}
     for c in line:
-        if c == '<': stack.append('>')
-        elif c == '(': stack.append(')')
-        elif c == '[': stack.append(']')
-        elif c == '{': stack.append('}')
-        else:
-            if c != stack[-1]: return value[c]
-            else: stack.pop()
-    #if stack == []: return ?
+        if c in closing: stack.append(closing[c])
+        elif c != stack[-1]: return value[c]
+        else: stack.pop()
     return 0
 
-score = 0
-for line in data: score += parse_line(line)
-
-print(score)
+print(sum(map(parse_line,data)))
