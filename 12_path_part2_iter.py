@@ -13,24 +13,21 @@ for l in data:
     G[a].append(b)
     G[b].append(a)
 
-visited = [("start",0)]
+visited = [("start",0,False)]
 paths = 0
-nv = {"start":1}
 while len(visited):
-    n,i = visited.pop()
-    if i == len(G[n]):
-        if n in nv: nv[n] -= 1
-        continue
-    visited.append((n,i+1))
+    n,i,d = visited.pop()
+    if i == len(G[n]): continue
+    visited.append((n,i+1,d))
     nn = G[n][i]
     if nn == "end":
         paths += 1
         continue
-    small = ord(nn[0])>96
-    mvc = max(nv.values())
-    if small and nn not in nv: nv[nn]=0
-    if nn == "start" or small and nv[nn] and mvc==2: continue
-    if small: nv[nn] += 1
-    visited.append((nn,0))
+    if nn == "start": continue
+    if ord(nn[0])>96:
+        if nn in [v[0] for v in visited]:
+            if d: continue
+            else: d=True
+    visited.append((nn,0,d))
 
 print(paths)
