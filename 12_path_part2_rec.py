@@ -14,16 +14,13 @@ for l in data:
     G[b].append(a)
 
 def path(begin="start",end="end",visited=[],double=False):
-    if begin==end:
-        return [",".join(visited)]
+    if begin==end: return 1
     v = visited[::]
     v.append(begin)
-    p = []
+    p = 0
     for n in G[begin]:
-        if ord(n[0]) < 97 or n not in visited:
-            p += path(n,end,v,double)
-        elif not double and n != "start":
-            p += path(n,end,v,True)
+        if ord(n[0]) < 97 or n not in visited: p += path(n,end,v,double)
+        elif not double and n != "start": p += path(n,end,v,True)
     return p
 
-print(len(path()))
+print(path())
