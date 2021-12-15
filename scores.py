@@ -3,10 +3,9 @@
 import requests,json
 from datetime import datetime
 
-with open("session.txt","r") as f: sess=f.read()
-with open("scoreboard.txt","r") as f: scoreboard=f.read()
+from common import *
 
-r = requests.get(f"https://adventofcode.com/2021/leaderboard/private/view/{scoreboard}.json",cookies={'session':sess})
+r = requests.get(f"https://adventofcode.com/{year}/leaderboard/private/view/{scoreboard}.json",cookies={'session':session})
 scores = json.loads(r.content.decode())
 nmembers = len(scores["members"])
 

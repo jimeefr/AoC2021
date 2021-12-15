@@ -1,4 +1,5 @@
 session.txt
 scoreboard.txt
+config.py
 __pycache__/*
 tmp/*
