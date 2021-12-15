@@ -8,7 +8,6 @@ data = read_input(15)
 G = defaultdict(list)
 start = 0
 end = len(data[0])-1+1j*(len(data)-1)
-print(end)
 
 for y in range(len(data)):
     for x in range(len(data[y])):
@@ -17,7 +16,6 @@ for y in range(len(data)):
         if x < len(data[y])-1: G[x+1+1j*y].append([x+1j*y,int(data[y][x])])
         if y < len(data)-1: G[x+1j*(y+1)].append([x+1j*y,int(data[y][x])])
 
-if end in G: print('pouet')
 for n in G: G[n].sort(key=lambda x:x[1])
 
 new = [start]
@@ -28,7 +26,6 @@ while new:
     for n1,d1 in G[n]:
         ll = l+d1
         if not n1 in distance or ll < distance[n1]:
-            if n1 == end: print(f"found {ll}")
             distance[n1]=ll
             new.append(n1)
         else: continue

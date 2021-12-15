@@ -29,9 +29,7 @@ for y in range(len(data2)):
 
 
 end = 5*lx-1+1j*(5*ly-1)
-print(end)
-if end in G: print('pouet')
-#for n in G: G[n].sort(key=lambda x:x[1])
+for n in G: G[n].sort(key=lambda x:x[1])
 
 new = [start]
 distance = {start:0}
@@ -41,7 +39,6 @@ while new:
     for n1,d1 in G[n]:
         ll = l+d1
         if not n1 in distance or ll < distance[n1]:
-            if n1 == end: print(f"found {ll}")
             distance[n1]=ll
             new.append(n1)
         else: continue
