@@ -8,7 +8,6 @@ data = read_input(16)
 def parse_packet(s):
     version = int(s[0:3],2)
     typeid = int(s[3:6],2)
-    print(s,version,typeid)
     if typeid==4:
         pos=6
         fin=False
@@ -46,13 +45,8 @@ def versum(packet):
     return version+sum(map(versum,l))
 
 def parse_hex(p):
-    print(p)
     s=bin(int(p,16))[2:]
     while len(s)<4*len(p): s = "0"+s
     return parse_packet(s)
 
-print(versum(parse_hex("8A004A801A8002F478")))
-print(versum(parse_hex("620080001611562C8802118E34")))
-print(versum(parse_hex("C0015000016115A2E0802F182340")))
-print(versum(parse_hex("A0016C880162017C3686B18A3D4780")))
 print(versum(parse_hex(data[0])))
