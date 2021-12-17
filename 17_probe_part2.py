@@ -21,7 +21,12 @@ def vcheck(vx,vy):
     return False
 
 count=0
-for vx in range(int(sqrt(targetx[0]*2)),targetx[1]+1):
-    for vy in range(targety[0]-1,-targety[0]+1):
-        if vcheck(vx,vy): count+=1
+for vy in range(-targety[0]-1,targety[0]-1,-1):
+    s=""
+    for vx in range(int(sqrt(targetx[0]*2))+1,targetx[1]+1):
+        if vcheck(vx,vy):
+            s += "X"
+            count+=1
+        else: s += "."
+    print(s)
 print(count)
