@@ -1,32 +1,15 @@
 #!/usr/bin/env python3
 
 from common import *
+import re
 
 data = read_input(18)
 
-def myrepr(number):
-    if isinstance(number,int): return str(number)
-    left,right = number
-    return '['+myrepr(left)+','+myrepr(right)+']'
-
-def myread(s):
-    pos=0
-    if s[0] != '[':
-        n=0
-        while s[pos] in "0123456789": pos+=1
-        return int(s[:pos]),pos
-    else:
-        assert s[pos]=='['
-        pos += 1
-        left,l = myread(s[pos:])
-        pos += l
-        assert s[pos]==','
-        pos += 1
-        right,l = myread(s[pos:])
-        pos += l
-        assert s[pos]==']'
-        pos += 1
-        return [left,right],pos
+regsnail = re.compile(r'^[0-9[\],]*$')
+def myread(s): 
+    assert regsnail.match(s)
+    return eval(s)
+def myrepr(n): return repr(n).replace(' ','')
 
 def change(n,pos,value):
     if len(pos)==1: 
@@ -99,7 +82,7 @@ def magnitude(number):
 
 def add(n1,n2): return red([n1,n2])
 
-numbers = list(map(lambda x:myread(x)[0],data))
+numbers = list(map(myread,data))
 
 max_m = 0
 for i in range(len(numbers)):
