@@ -6,8 +6,9 @@ data = read_input(25)
 data = [ [ c for c in l ] for l in data ]
 
 def show(Map):
+    print(chr(27)+'[H',end='',flush=True)
     for l in Map: print(''.join(l))
-    print()
+    print(flush=True)
 
 def moveeast(Map):
     w,h = len(Map[0]),len(Map)
@@ -43,8 +44,10 @@ def move(m):
 moved = True
 steps = 0
 m = data
+print(chr(27)+'[?25l'+chr(27)+'[2J',end='',flush=True)
 while moved:
     moved,m = move(m)
     steps += 1
-show(m)
+    show(m)
 print(steps)
+print(chr(27)+'[?25h',end='',flush=True)
