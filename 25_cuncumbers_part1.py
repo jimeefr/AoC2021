@@ -6,9 +6,9 @@ data = read_input(25)
 data = [ [ c for c in l ] for l in data ]
 
 def show(Map):
-    print(chr(27)+'[H',end='',flush=True)
+    print(chr(27)+'[H',end='')
     for l in Map: print(''.join(l))
-    print(flush=True)
+    print(end='',flush=True)
 
 def moveeast(Map):
     w,h = len(Map[0]),len(Map)
